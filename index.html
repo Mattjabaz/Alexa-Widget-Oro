@@ -9,14 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --marino:#0A1A2F;
-  --marino-claro:#12293F;
-  --linea:#1E3A56;
-  --tiffany:#81D8D0;
-  --blanco:#FFFFFF;
-  --tenue:#8AA4BC;
-  --verde:#3ED598;
-  --rojo:#F26D5B;
+  --marino:#0A1A2F; --marino-claro:#12293F; --linea:#1E3A56;
+  --tiffany:#81D8D0; --blanco:#FFFFFF; --tenue:#8AA4BC;
+  --verde:#3ED598; --rojo:#F26D5B;
   --num:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
   --gra:'Bodoni Moda',Georgia,serif;
 }
@@ -25,100 +20,88 @@ html,body{height:100%;overflow:hidden;background:var(--marino);color:var(--blanc
   font-family:var(--num);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 body{display:flex;flex-direction:column;padding:2vh 2.4vw;user-select:none}
 
-/* ── cabecera ── */
 .cab{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:1em}
 .marca{display:flex;align-items:center;gap:.7em}
-.marca img{height:clamp(28px,5.6vh,50px);width:auto;display:block}
-.titulo{font-family:var(--gra);font-size:clamp(13px,2.5vh,26px);letter-spacing:.19em;
-  text-transform:uppercase;line-height:1.1}
+.marca img{height:clamp(26px,5.2vh,46px);width:auto;display:block}
+.titulo{font-family:var(--gra);font-size:clamp(12px,2.4vh,25px);letter-spacing:.19em;text-transform:uppercase;line-height:1.1}
 .titulo em{font-style:italic;color:var(--tiffany)}
-.estado{display:flex;align-items:center;gap:.55em;font-size:clamp(9px,1.6vh,15px);
+.estado{display:flex;align-items:center;gap:.55em;font-size:clamp(9px,1.5vh,14px);
   letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
-.foco{width:.55em;height:.55em;border-radius:50%;background:var(--tiffany);
-  animation:latir 4s ease-out infinite}
+.foco{width:.55em;height:.55em;border-radius:50%;background:var(--tiffany);animation:latir 4s ease-out infinite}
 .foco.frio{background:var(--rojo);animation:none}
 @keyframes latir{0%{box-shadow:0 0 0 0 rgba(129,216,208,.45)}70%,100%{box-shadow:0 0 0 .55em rgba(129,216,208,0)}}
-.regla{flex:0 0 auto;height:1px;margin-top:1.2vh;
-  background:linear-gradient(90deg,var(--tiffany),var(--linea) 50%,transparent)}
+.regla{flex:0 0 auto;height:1px;margin-top:1.1vh;background:linear-gradient(90deg,var(--tiffany),var(--linea) 50%,transparent)}
 
-/* ── mercado ── */
-.mercado{flex:0 0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:2.4vw;padding:2.4vh 0 2.6vh}
-.rotulo{font-size:clamp(9px,1.55vh,14px);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--tenue);margin-bottom:.35em}
-.mercado .cifra{font-size:clamp(30px,7.4vh,66px);font-weight:500;line-height:.92;letter-spacing:-.025em}
+.mercado{flex:0 0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:2.4vw;padding:2.1vh 0 2.3vh}
+.rotulo{font-size:clamp(8px,1.5vh,14px);letter-spacing:.22em;text-transform:uppercase;color:var(--tenue);margin-bottom:.35em}
+.mercado .cifra{font-size:clamp(28px,7vh,62px);font-weight:500;line-height:.92;letter-spacing:-.025em}
 .sig{color:var(--tiffany);opacity:.72;font-size:.5em;vertical-align:.32em;margin-right:.1em}
-.pie{display:flex;align-items:baseline;gap:.8em;margin-top:.45em;
-  font-size:clamp(10px,1.7vh,16px);color:var(--tenue)}
-.delta{font-weight:700;letter-spacing:.01em}
+.pie{display:flex;align-items:baseline;gap:.7em;margin-top:.45em;font-size:clamp(9px,1.6vh,15px);color:var(--tenue)}
+.delta{font-weight:700}
 .delta.up{color:var(--verde)} .delta.dn{color:var(--rojo)}
 
-/* ── quilates ── */
 .leyes{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5vw}
-.ley{position:relative;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:25vh;
-  background:var(--marino-claro);border:1px solid var(--linea);border-radius:5px;
-  padding:1.8vh 1.4vw;overflow:hidden}
+.ley{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:24vh;padding:7.2vh 1.4vw 2vh;
+  background:var(--marino-claro);border:1px solid var(--linea);border-radius:5px;overflow:hidden}
 .ley::before{content:'';position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(158deg,rgba(129,216,208,.10),transparent 46%)}
-.motivo{position:absolute;right:-2%;bottom:-8%;width:50%;opacity:.13;pointer-events:none}
+.motivo{position:absolute;right:-2%;bottom:-8%;width:48%;opacity:.13;pointer-events:none}
 .motivo svg{width:100%;height:auto;display:block}
-.punzon{position:absolute;top:1.5vh;left:1.2vw;font-family:var(--gra);font-weight:500;
-  font-size:clamp(15px,3.1vh,32px);letter-spacing:.09em;line-height:1;color:var(--tiffany);
-  border:2px solid var(--tiffany);border-radius:2.2em;padding:.32em .78em .4em}
+.punzon{position:absolute;top:1.6vh;left:1.2vw;font-family:var(--gra);font-weight:500;
+  font-size:clamp(12px,2.5vh,26px);letter-spacing:.09em;line-height:1;color:var(--tiffany);
+  border:1.5px solid var(--tiffany);border-radius:2.2em;padding:.3em .74em .38em}
 .dato{position:relative;text-align:center}
-.ley .cifra{font-size:clamp(30px,8.4vh,74px);font-weight:700;line-height:.92;letter-spacing:-.035em}
+.ley .cifra{font-size:clamp(28px,7.8vh,68px);font-weight:700;line-height:.92;letter-spacing:-.035em}
 .ley .sig{font-size:.46em;vertical-align:.42em;margin-right:.08em}
-.ley .unidad{font-size:clamp(8px,1.5vh,14px);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--tenue);margin-top:.5em}
+.ley .unidad{font-size:clamp(8px,1.4vh,13px);letter-spacing:.2em;text-transform:uppercase;color:var(--tenue);margin-top:.5em}
 .destello{animation:destellar 1s ease-out}
 @keyframes destellar{0%{color:var(--tiffany)}100%{}}
 
-/* ── gráfica: vive sobre el fondo, sin caja ── */
-.grafica{flex:1 1 auto;display:flex;flex-direction:column;min-height:14vh;padding-top:2vh}
-.gcab{flex:0 0 auto;display:flex;align-items:baseline;justify-content:space-between;
-  gap:1em;margin-bottom:.7vh}
-.gizq{display:flex;align-items:baseline;gap:.9em}
-.gtit{font-size:clamp(9px,1.55vh,14px);letter-spacing:.22em;text-transform:uppercase;color:var(--tenue)}
-.gvar{font-size:clamp(11px,1.85vh,17px);font-weight:700}
+.grafica{flex:1 1 auto;display:flex;flex-direction:column;min-height:15vh;padding-top:1.8vh}
+.gcab{flex:0 0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:1em;margin-bottom:.6vh}
+.gizq{display:flex;align-items:baseline;gap:.8em}
+.gtit{font-size:clamp(8px,1.5vh,13px);letter-spacing:.22em;text-transform:uppercase;color:var(--tenue)}
+.gvar{font-size:clamp(10px,1.75vh,16px);font-weight:700}
 .gvar.up{color:var(--verde)} .gvar.dn{color:var(--rojo)}
-.rangos{display:flex;gap:.35em}
-.rangos button{font-family:var(--num);font-size:clamp(9px,1.5vh,14px);font-weight:500;
-  letter-spacing:.1em;color:var(--tenue);background:transparent;
-  border:1px solid var(--linea);border-radius:2em;padding:.36em .85em;cursor:pointer}
+.rangos{display:flex;gap:.3em}
+.rangos button{font-family:var(--num);font-size:clamp(8px,1.45vh,13px);font-weight:500;letter-spacing:.1em;
+  color:var(--tenue);background:transparent;border:1px solid var(--linea);border-radius:2em;
+  padding:.34em .8em;cursor:pointer}
 .rangos button.on{color:var(--marino);background:var(--tiffany);border-color:var(--tiffany)}
-.lienzo{flex:1 1 auto;position:relative;min-height:0}
+.lienzo{flex:1 1 auto;position:relative;min-height:0;touch-action:none}
 .lienzo svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.gnota{position:absolute;left:0;top:50%;transform:translateY(-50%);
-  font-size:clamp(9px,1.5vh,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
+.gnota{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;
+  font-size:clamp(8px,1.45vh,13px);letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
+.globo{position:absolute;pointer-events:none;z-index:3;transform:translate(-50%,-118%);
+  background:var(--marino);border:1px solid var(--tiffany);border-radius:4px;padding:.4em .7em;
+  white-space:nowrap;opacity:0;transition:opacity .12s}
+.globo.ver{opacity:1}
+.globo .gf{display:block;font-size:clamp(8px,1.4vh,12px);letter-spacing:.12em;text-transform:uppercase;color:var(--tenue)}
+.globo .gp{display:block;font-size:clamp(12px,1.9vh,17px);font-weight:700;color:var(--blanco);margin-top:.15em}
 
-/* ── zócalo ── */
 .zocalo{flex:0 0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:1em;
-  margin-top:1.2vh;padding-top:1.2vh;border-top:1px solid var(--linea);
-  font-size:clamp(9px,1.55vh,14px);letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
-.zocalo .der{text-align:right}
-.zocalo .med{text-align:center}
+  margin-top:1.1vh;padding-top:1.1vh;border-top:1px solid var(--linea);
+  font-size:clamp(8px,1.5vh,13px);letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+.zocalo .der{text-align:right} .zocalo .med{text-align:center}
 .zocalo .med b{color:var(--tiffany);font-weight:500;letter-spacing:.06em}
 
-/* ── portada ── */
 #portada{position:fixed;inset:0;z-index:9;background:var(--marino);cursor:pointer;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1em}
-#portada img{height:clamp(60px,15vh,124px);width:auto}
-#portada .lema{font-family:var(--gra);font-size:clamp(17px,3.8vh,36px);letter-spacing:.2em;
-  text-transform:uppercase}
+#portada img{height:clamp(58px,14vh,120px);width:auto}
+#portada .lema{font-family:var(--gra);font-size:clamp(16px,3.6vh,34px);letter-spacing:.2em;text-transform:uppercase}
 #portada .lema em{font-style:italic;color:var(--tiffany)}
-#portada .instr{font-size:clamp(10px,1.8vh,17px);letter-spacing:.2em;text-transform:uppercase;color:var(--tenue)}
+#portada .instr{font-size:clamp(10px,1.7vh,16px);letter-spacing:.2em;text-transform:uppercase;color:var(--tenue)}
 #portada.ido{display:none}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 @media (max-aspect-ratio:1/1){
-  .mercado{grid-template-columns:1fr;gap:1.6vh;padding:1.8vh 0}
+  .mercado{grid-template-columns:1fr;gap:1.5vh;padding:1.6vh 0}
   .leyes{grid-template-columns:1fr;gap:.9vh}
-  .ley{flex-direction:row;align-items:center;justify-content:space-between;min-height:0}
-  .punzon{position:static;font-size:clamp(14px,2.6vh,26px)}
-  .dato{text-align:right}
-  .ley .unidad{display:none}
-  .motivo{width:24%}
-  .grafica{min-height:18vh}
+  .ley{flex-direction:row;align-items:center;justify-content:space-between;min-height:0;padding:1.4vh 3vw}
+  .punzon{position:static;font-size:clamp(13px,2.5vh,24px)}
+  .dato{text-align:right} .ley .unidad{display:none} .motivo{width:22%}
+  .grafica{min-height:20vh}
   .zocalo{grid-template-columns:1fr;text-align:center;gap:.25em}
   .zocalo .der{text-align:center}
 }
@@ -139,95 +122,69 @@ body{display:flex;flex-direction:column;padding:2vh 2.4vw;user-select:none}
   <div>
     <div class="rotulo">Onza troy &middot; spot</div>
     <div class="cifra"><span class="sig">$</span><span id="xau">&mdash;</span></div>
-    <div class="pie"><span>USD / oz</span><span class="delta" id="delta"></span></div>
+    <div class="pie"><span>USD / oz</span><span class="delta" id="delta"></span><span id="anclaTxt" style="opacity:.7"></span></div>
   </div>
   <div>
     <div class="rotulo">Tipo de cambio</div>
     <div class="cifra"><span class="sig">$</span><span id="fx">&mdash;</span></div>
-    <div class="pie"><span>MXN por USD</span><span id="fxsello" style="opacity:.75"></span></div>
+    <div class="pie"><span>MXN por USD</span><span id="fxsello" style="opacity:.7"></span></div>
   </div>
 </div>
 
 <div class="leyes">
-
   <div class="ley">
-    <div class="motivo"><!-- lingotes -->
-      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4"
-           stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 124 L94 124 L85 98 L27 98 Z"/>
-        <path d="M27 98 L34 88 L92 88 L85 98"/>
-        <path d="M100 124 L176 124 L167 98 L109 98 Z"/>
-        <path d="M109 98 L116 88 L174 88 L167 98"/>
-        <path d="M59 88 L135 88 L126 62 L68 62 Z"/>
-        <path d="M68 62 L75 52 L133 52 L126 62"/>
+    <div class="motivo">
+      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 124 L94 124 L85 98 L27 98 Z"/><path d="M27 98 L34 88 L92 88 L85 98"/>
+        <path d="M100 124 L176 124 L167 98 L109 98 Z"/><path d="M109 98 L116 88 L174 88 L167 98"/>
+        <path d="M59 88 L135 88 L126 62 L68 62 Z"/><path d="M68 62 L75 52 L133 52 L126 62"/>
       </svg>
     </div>
     <span class="punzon">24 K</span>
-    <div class="dato">
-      <div class="cifra"><span class="sig">$</span><span id="g24">&mdash;</span></div>
-      <div class="unidad">MXN por gramo</div>
-    </div>
+    <div class="dato"><div class="cifra"><span class="sig">$</span><span id="g24">&mdash;</span></div>
+    <div class="unidad">MXN por gramo</div></div>
   </div>
 
   <div class="ley">
-    <div class="motivo"><!-- billetes -->
-      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4"
-           stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+    <div class="motivo">
+      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
         <rect x="42" y="48" width="118" height="60" rx="5" transform="rotate(-11 101 78)"/>
         <rect x="42" y="48" width="118" height="60" rx="5" transform="rotate(-3 101 78)"/>
-        <g transform="rotate(6 101 78)">
-          <rect x="42" y="48" width="118" height="60" rx="5"/>
-          <ellipse cx="101" cy="78" rx="16" ry="20"/>
-          <circle cx="60" cy="78" r="6"/>
-          <circle cx="142" cy="78" r="6"/>
-        </g>
+        <g transform="rotate(6 101 78)"><rect x="42" y="48" width="118" height="60" rx="5"/>
+        <ellipse cx="101" cy="78" rx="16" ry="20"/><circle cx="60" cy="78" r="6"/><circle cx="142" cy="78" r="6"/></g>
       </svg>
     </div>
     <span class="punzon">14 K</span>
-    <div class="dato">
-      <div class="cifra"><span class="sig">$</span><span id="g14">&mdash;</span></div>
-      <div class="unidad">MXN por gramo</div>
-    </div>
+    <div class="dato"><div class="cifra"><span class="sig">$</span><span id="g14">&mdash;</span></div>
+    <div class="unidad">MXN por gramo</div></div>
   </div>
 
   <div class="ley">
-    <div class="motivo"><!-- monedas -->
-      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4"
-           stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="154" cy="86" r="30"/>
-        <circle cx="154" cy="86" r="18"/>
-        <path d="M38 70 L38 120 M114 70 L114 120"/>
-        <ellipse cx="76" cy="70" rx="38" ry="12"/>
-        <path d="M38 88 A38 12 0 0 0 114 88"/>
-        <path d="M38 104 A38 12 0 0 0 114 104"/>
-        <path d="M38 120 A38 12 0 0 0 114 120"/>
+    <div class="motivo">
+      <svg viewBox="0 0 200 150" fill="none" stroke="#81D8D0" stroke-width="4" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="154" cy="86" r="30"/><circle cx="154" cy="86" r="18"/>
+        <path d="M38 70 L38 120 M114 70 L114 120"/><ellipse cx="76" cy="70" rx="38" ry="12"/>
+        <path d="M38 88 A38 12 0 0 0 114 88"/><path d="M38 104 A38 12 0 0 0 114 104"/><path d="M38 120 A38 12 0 0 0 114 120"/>
       </svg>
     </div>
     <span class="punzon">10 K</span>
-    <div class="dato">
-      <div class="cifra"><span class="sig">$</span><span id="g10">&mdash;</span></div>
-      <div class="unidad">MXN por gramo</div>
-    </div>
+    <div class="dato"><div class="cifra"><span class="sig">$</span><span id="g10">&mdash;</span></div>
+    <div class="unidad">MXN por gramo</div></div>
   </div>
-
 </div>
 
 <div class="grafica">
   <div class="gcab">
     <div class="gizq">
-      <span class="gtit">Oro &middot; histórico USD/oz</span>
+      <span class="gtit">Oro &middot; USD/oz</span>
       <span class="gvar" id="gvar"></span>
     </div>
-    <div class="rangos" id="rangos">
-      <button data-r="1D">1D</button>
-      <button data-r="1M">1M</button>
-      <button data-r="6M">6M</button>
-      <button data-r="1A">1A</button>
-      <button data-r="3A">3A</button>
-      <button data-r="5A" class="on">5A</button>
-    </div>
+    <div class="rangos" id="rangos"></div>
   </div>
-  <div class="lienzo" id="lienzo"><span class="gnota" id="gnota">cargando histórico…</span></div>
+  <div class="lienzo" id="lienzo">
+    <span class="gnota" id="gnota">cargando&hellip;</span>
+    <div class="globo" id="globo"><span class="gf"></span><span class="gp"></span></div>
+  </div>
 </div>
 
 <div class="zocalo">
@@ -243,288 +200,463 @@ body{display:flex;flex-direction:column;padding:2vh 2.4vw;user-select:none}
 </div>
 
 <script>
-/* ══════════════ AJUSTES ══════════════ */
+/* ═════════════════ AJUSTES ═════════════════ */
 const CFG = {
-  /* Cadencia del oro. 10 s es el extremo agresivo: son ~8,600 llamadas al día.
-     Si ves que el sello de arriba salta seguido a otra fuente, sube este número
-     a 15000 o 20000 y el problema desaparece. Nada más se toca. */
-  oroMsBase: 10000,
-  fxMs: 45000,               // 80 llamadas/hora: bajo el tope anónimo de 100/hora
-  histMs: 21600000,          // relee el histórico cada 6 h (la fuente publica 1 vez al día)
+  /* ─── PEGA AQUÍ TU LLAVE DE goldprice.dev ───
+     Entre las comillas, incluyendo el prefijo ga_live_
+     Con llave Pro se habilitan los rangos 6M, 1A, 3A y 5A. */
+  clave: 'ga_live_EmKrkD5osIhcnQxYir_o7ocAUYy0EmEXVqFUCdpb',
+
+  /* Cadencia del oro con mercado activo. 25 s consume ~75% de la cuota
+     mensual de 100,000 llamadas. No lo bajes de 20 s o te quedas sin
+     servicio antes de fin de mes. */
+  oroMsBase: 25000,
+  fxMs: 45000,
+  histMs: 21600000,
   ozTroyGramos: 31.1034768,
   ley: { k24: 1.0, k14: 0.585, k10: 0.417 }
 };
 
-/* Fuentes en cascada. minMs = intervalo mínimo que respeta cada proveedor.
-   Mientras la primera responda, las demás nunca se tocan. */
+const API_ORO = 'https://api.goldprice.dev';
+const autoriza = () => CFG.clave ? {Authorization: 'Bearer ' + CFG.clave} : {};
+
+/* Con llave, el spot sale de la MISMA serie que la gráfica y el ancla:
+   XAU-USD-SPOT. Sin llave cae a fuentes gratuitas, que cotizan futuros
+   de CME y no cuadran con el histórico. */
 const FUENTES_ORO = [
-  { nombre:'gold-api', minMs:10000,
-    url:'https://api.gold-api.com/price/XAU', leer: j => +j.price },
-  { nombre:'xaus', minMs:30000,              // su política pide caché de 30 s
-    url:'https://xaus.com/api/v1/price',
-    leer: j => +(j.spot_usd_oz ?? j.xau?.price ?? j.price) },
-  { nombre:'goldprice', minMs:300000,        // tramo gratuito angosto: solo respaldo
-    url:'https://goldprice.dev/v1/prices?symbol=XAU-USD-SPOT',
-    leer: j => +(j.price ?? j.data?.price ?? j.prices?.[0]?.price) }
+  { nombre:'goldprice', minMs:20000, auth:true,
+    url: API_ORO + '/v1/prices?symbol=XAU-USD-SPOT',
+    leer: j => +(j.price ?? j.data?.price ?? j.prices?.[0]?.price) },
+  { nombre:'gold-api', minMs:15000, url:'https://api.gold-api.com/price/XAU', leer: j => +j.price },
+  { nombre:'xaus', minMs:30000, url:'https://xaus.com/api/v1/price',
+    leer: j => +(j.spot_usd_oz ?? j.xau?.price ?? j.price) }
 ];
 const FUENTES_FX = [
-  { nombre:'interbancario', minMs:45000,     // media de mercado en vivo, misma base que XE
+  { nombre:'interbancario', minMs:45000,
     url:'https://api.exchangerate.dev/v1/latest/USD?symbols=MXN',
     leer: j => +(j.rates?.MXN ?? j.data?.rates?.MXN ?? j.quotes?.USDMXN) },
-  { nombre:'er-api', minMs:3600000,
-    url:'https://open.er-api.com/v6/latest/USD', leer: j => +j.rates.MXN },
-  { nombre:'frankfurter', minMs:3600000,
-    url:'https://api.frankfurter.app/latest?from=USD&to=MXN', leer: j => +j.rates.MXN }
+  { nombre:'er-api', minMs:3600000, url:'https://open.er-api.com/v6/latest/USD', leer: j => +j.rates.MXN },
+  { nombre:'frankfurter', minMs:3600000, url:'https://api.frankfurter.app/latest?from=USD&to=MXN', leer: j => +j.rates.MXN }
 ];
-const URL_HIST     = 'https://freegoldapi.com/data/latest.json';
-const URL_INTRADIA = 'https://xaus.com/api/v1/intraday?symbol=xau&hours=24';
+
+/* Rangos. pro=true exige llave; sin llave ni aparecen. */
+const RANGOS = [
+  { id:'1D', dias:1,    fuente:'intra', paso:{h:3},   fmt:'hora' },
+  { id:'1S', dias:7,    fuente:'bars',  paso:{d:1},   fmt:'dia'  },
+  { id:'1M', dias:30,   fuente:'bars',  paso:{d:5},   fmt:'dia'  },
+  { id:'6M', dias:182,  fuente:'bars',  paso:{d:15},  fmt:'dia',    pro:true },
+  { id:'1A', dias:365,  fuente:'bars',  paso:{M:1},   fmt:'mes',    pro:true },
+  { id:'3A', dias:1095, fuente:'bars',  paso:{M:6},   fmt:'mesaño', pro:true },
+  { id:'5A', dias:1825, fuente:'bars',  paso:{M:12},  fmt:'anio',   pro:true }
+];
 
 const $ = id => document.getElementById(id);
-const mx = (n, d = 2) => n.toLocaleString('es-MX', {minimumFractionDigits:d, maximumFractionDigits:d});
+const mx = (n,d=2) => n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
+const usd = n => n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-let tcActual = null, cierreAnterior = null;
-let historico = null;          // [{t,p}] diario/mensual
-let intradia  = [];            // [{t,p}] muestras del día
-let rango = '5A';
+/* ─── Gobernador de cuota ───
+   Reparte lo que queda del mes entre el tiempo que queda del mes.
+   Si vas holgado respeta oroMsBase; si vas rápido, estira solo.
+   Sin memoria disponible cae a 30 s, que cabe siempre. */
+const CUOTA = { mes: 100000, reserva: 8000 };
+const LLAVE_MEM = 'fgl_cuota';
 
-/* ───────── red con freno ─────────
-   Cada fuente lleva su propio reloj. Si devuelve 429 o 403 entra en castigo
-   creciente (5, 10, 20… hasta 60 min) y se deja de tocar. Si falla por otra
-   razón, descansa 1 min y va duplicando. Así un tope temporal nunca escala. */
+function consumo(){
+  try{
+    const h = new Date(), etq = h.getUTCFullYear()+'-'+h.getUTCMonth();
+    let d = JSON.parse(localStorage.getItem(LLAVE_MEM) || 'null');
+    if (!d || d.mes !== etq) d = {mes: etq, n: 0};
+    return d;
+  }catch(e){ return null; }
+}
+function sumar(n = 1){
+  const d = consumo(); if (!d) return;
+  d.n += n;
+  try{ localStorage.setItem(LLAVE_MEM, JSON.stringify(d)); }catch(e){}
+}
+function ritmoPermitido(){
+  const d = consumo();
+  if (!d) return 30000;
+  const h = new Date();
+  const finMes = Date.UTC(h.getUTCFullYear(), h.getUTCMonth()+1, 1);
+  const quedanMs = Math.max(finMes - Date.now(), 60000);
+  const quedanLlamadas = (CUOTA.mes - CUOTA.reserva) - d.n;
+  if (quedanLlamadas <= 0) return 900000;
+  return Math.max(CFG.oroMsBase, Math.round(quedanMs / quedanLlamadas));
+}
+function usadoPct(){
+  const d = consumo();
+  return d ? Math.round(d.n / CUOTA.mes * 100) : null;
+}
+
+let tcActual = null;
+let ancla = null;            // {p, tipo:'apertura'|'cierre'}
+let intradia = [];
+let barras = new Map();      // dias -> [{t,p}]
+let rango = '1M';
+
+/* ───────── red con freno ───────── */
 const RELOJ = new Map();
-const marca = f => {
-  if (!RELOJ.has(f.url)) RELOJ.set(f.url, {libre:0, fallos:0, castigo:0});
-  return RELOJ.get(f.url);
-};
+const marca = f => { if(!RELOJ.has(f.url)) RELOJ.set(f.url,{libre:0,fallos:0,castigo:0}); return RELOJ.get(f.url); };
 
 async function probar(fuentes){
   for (const f of fuentes){
     const m = marca(f);
-    if (Date.now() < m.libre) continue;          // aún en su intervalo o castigada
+    if (Date.now() < m.libre) continue;
     try{
-      const r = await fetch(f.url, {cache:'no-store'});
-      if (r.status === 429 || r.status === 403){
-        m.castigo = Math.min((m.castigo || 150000) * 2, 3600000);
-        m.libre = Date.now() + m.castigo;
-        console.warn('freno en', f.nombre, Math.round(m.castigo/60000) + ' min');
-        continue;
+      const r = await fetch(f.url,{cache:'no-store', headers: f.auth ? autoriza() : {}});
+      if (r.status===429 || r.status===403){
+        m.castigo = Math.min((m.castigo||150000)*2, 3600000);
+        m.libre = Date.now()+m.castigo; continue;
       }
       if (!r.ok) throw new Error(r.status);
       const n = f.leer(await r.json());
-      if (!Number.isFinite(n) || n <= 0) throw new Error('dato');
-      m.fallos = 0; m.castigo = 0;
-      m.libre = Date.now() + f.minMs;            // respeta su cadencia mínima
+      if (!Number.isFinite(n) || n<=0) throw new Error('dato');
+      m.fallos=0; m.castigo=0; m.libre=Date.now()+f.minMs;
+      if (f.auth) sumar();
       return {n, nombre:f.nombre};
     }catch(e){
-      m.fallos++;
-      m.libre = Date.now() + Math.min(60000 * 2**(m.fallos-1), 900000);
+      m.fallos++; m.libre = Date.now()+Math.min(60000*2**(m.fallos-1),900000);
     }
   }
   return null;
 }
 
-function pintar(id, txt){
-  const el = $(id);
-  if (el.textContent === txt) return;
-  el.textContent = txt;
-  el.classList.remove('destello'); void el.offsetWidth; el.classList.add('destello');
+function pintar(id,txt){
+  const el=$(id); if(el.textContent===txt) return;
+  el.textContent=txt; el.classList.remove('destello'); void el.offsetWidth; el.classList.add('destello');
+}
+
+/* ───────── barras diarias ─────────
+   Devuelve [{t,p}] con el cierre de cada día. La barra en formación
+   (is_closed:false) también sirve: es la sesión de hoy. */
+async function traerBarras(dias){
+  if (barras.has(dias)) return barras.get(dias);
+  const hasta = new Date(), desde = new Date(Date.now() - dias*86400000);
+  const iso = d => d.toISOString().slice(0,10);
+  const cab = autoriza();
+  let cursor, salida = [], paginas = 0;
+  try{
+    do{
+      const u = new URL(API_ORO + '/v1/bars');
+      u.search = new URLSearchParams({symbol:'XAU-USD-SPOT', interval:'1d',
+        from:iso(desde), to:iso(hasta), limit:'500', ...(cursor?{cursor}:{})}).toString();
+      const r = await fetch(u, {headers:cab, cache:'no-store'});
+      sumar();
+      if (!r.ok) break;
+      const j = await r.json();
+      for (const b of (j.bars||[])){
+        const t = Date.parse(b.bar_start), p = +b.close;
+        if (Number.isFinite(t) && p>0) salida.push({t, p, abre:+b.open, cerrada:b.is_closed!==false});
+      }
+      cursor = j.next_cursor;
+    } while (cursor && ++paginas < 20);
+  }catch(e){}
+  salida.sort((a,b)=>a.t-b.t);
+  barras.set(dias, salida);
+  return salida;
+}
+
+/* ancla del cambio intradía: apertura de la sesión en curso.
+   Si el mercado está cerrado, la apertura de la última sesión. */
+async function fijarAncla(){
+  const b = await traerBarras(7);
+  if (!b.length){ ancla = null; return; }
+  const ult = b[b.length-1];
+  ancla = { p: ult.abre, tipo: ult.cerrada ? 'sesión previa' : 'apertura' };
+  if (!Number.isFinite(ancla.p) || ancla.p<=0) ancla = {p: ult.p, tipo:'cierre previo'};
 }
 
 /* ───────── precios ───────── */
-let ultimaOnza = null, quietas = 0, intervaloOro = CFG.oroMsBase, temporizador = null;
+let ultimaOnza=null, quietas=0, intervaloOro=CFG.oroMsBase, temporizador=null;
 
 async function refrescarOro(){
-  if (document.hidden){ programarOro(); return; }   // pantalla oculta: no se gastan llamadas
+  if (document.hidden){ programarOro(); return; }
   const oro = await probar(FUENTES_ORO);
-  if (!oro){
-    $('foco').classList.add('frio'); $('sello').textContent = 'sin señal';
-    programarOro(); return;
-  }
+  if (!oro){ $('foco').classList.add('frio'); $('sello').textContent='sin señal'; programarOro(); return; }
   $('foco').classList.remove('frio');
-  $('sello').textContent = oro.nombre;
+  const pct = usadoPct();
+  $('sello').textContent = oro.nombre + (pct !== null && CFG.clave ? ' · ' + pct + '%' : '');
 
   const onza = oro.n;
-  pintar('xau', onza.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-
+  pintar('xau', usd(onza));
   if (tcActual){
-    const g24 = (onza / CFG.ozTroyGramos) * tcActual;
-    pintar('g24', mx(g24 * CFG.ley.k24));
-    pintar('g14', mx(g24 * CFG.ley.k14));
-    pintar('g10', mx(g24 * CFG.ley.k10));
+    const g24 = (onza/CFG.ozTroyGramos)*tcActual;
+    pintar('g24', mx(g24*CFG.ley.k24));
+    pintar('g14', mx(g24*CFG.ley.k14));
+    pintar('g10', mx(g24*CFG.ley.k10));
   }
 
-  if (cierreAnterior === null) cierreAnterior = onza;
-  const d = ((onza - cierreAnterior) / cierreAnterior) * 100;
   const el = $('delta');
-  el.className = 'delta ' + (d >= 0 ? 'up' : 'dn');
-  el.textContent = (d >= 0 ? '▲ ' : '▼ ') + Math.abs(d).toFixed(2) + '%';
+  if (ancla && ancla.p>0){
+    const d = ((onza-ancla.p)/ancla.p)*100;
+    el.className = 'delta ' + (d>=0?'up':'dn');
+    el.textContent = (d>=0?'▲ ':'▼ ') + Math.abs(d).toFixed(2) + '%';
+    $('anclaTxt').textContent = 'vs ' + ancla.tipo;
+  } else {
+    el.className='delta'; el.textContent='—'; $('anclaTxt').textContent='sin ancla';
+  }
 
   const ahora = new Date();
-  intradia.push({t: ahora.getTime(), p: onza});
-  if (intradia.length > 3000) intradia.shift();
-  if (rango === '1D') dibujar();
+  intradia.push({t:ahora.getTime(), p:onza});
+  if (intradia.length>4000) intradia.shift();
+  if (rango==='1D') dibujar();
 
-  $('ultima').textContent = ahora.toLocaleTimeString('es-MX',
-      {hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+  $('ultima').textContent = ahora.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
 
-  /* Mercado quieto (fin de semana, madrugada): aflojar el ritmo.
-     En cuanto el precio se mueva, vuelve a 10 s. */
-  quietas = (onza === ultimaOnza) ? quietas + 1 : 0;
+  quietas = (onza===ultimaOnza) ? quietas+1 : 0;
   ultimaOnza = onza;
-  intervaloOro = quietas >= 18 ? 120000 : quietas >= 6 ? 30000 : CFG.oroMsBase;
+  const escalera = quietas>=12 ? 300000 : quietas>=4 ? 60000 : CFG.oroMsBase;
+  intervaloOro = Math.max(escalera, ritmoPermitido());
   programarOro();
 }
-
-function programarOro(){
-  clearTimeout(temporizador);
-  temporizador = setTimeout(refrescarOro, intervaloOro);
-}
+function programarOro(){ clearTimeout(temporizador); temporizador=setTimeout(refrescarOro,intervaloOro); }
 
 async function refrescarFx(){
   if (document.hidden) return;
   const fx = await probar(FUENTES_FX);
   if (!fx) return;
   tcActual = fx.n;
-  pintar('fx', mx(tcActual, 4));
-  $('fxsello').textContent = fx.nombre === 'interbancario' ? 'interbancario' : 'referencia diaria';
+  pintar('fx', mx(tcActual,4));
+  $('fxsello').textContent = fx.nombre==='interbancario' ? '· interbancario' : '· referencia diaria';
 }
 
-/* ───────── histórico ───────── */
-async function cargarHistorico(){
+/* ───────── intradía ───────── */
+async function cargarIntradia(){
   try{
-    const r = await fetch(URL_HIST, {cache:'no-store'});
-    const j = await r.json();
-    historico = j.map(d => ({t: Date.parse(d.date + 'T00:00:00Z'), p: +d.price}))
-                 .filter(d => Number.isFinite(d.t) && d.p > 0)
-                 .sort((a,b) => a.t - b.t);
-    const ult = historico[historico.length - 1];
-    if (ult) cierreAnterior = ult.p;
-  }catch(e){ historico = []; }
-
-  try{
-    const r = await fetch(URL_INTRADIA, {cache:'no-store'});
+    const r = await fetch('https://xaus.com/api/v1/intraday?symbol=xau&hours=24',{cache:'no-store'});
     const j = await r.json();
     const pts = j.points ?? j.data ?? [];
-    const sem = pts.map(d => ({t: typeof d.t === 'number' ? (d.t < 1e12 ? d.t*1000 : d.t) : Date.parse(d.t),
-                               p: +(d.p ?? d.price)}))
-                   .filter(d => Number.isFinite(d.t) && d.p > 0);
-    if (sem.length) intradia = sem.concat(intradia).sort((a,b)=>a.t-b.t);
+    const s = pts.map(d=>({t: typeof d.t==='number' ? (d.t<1e12?d.t*1000:d.t) : Date.parse(d.t), p:+(d.p??d.price)}))
+                 .filter(d=>Number.isFinite(d.t)&&d.p>0);
+    if (s.length) intradia = s.concat(intradia).sort((a,b)=>a.t-b.t);
   }catch(e){}
-
-  dibujar();
 }
 
-const DIAS = {'1M':30, '6M':182, '1A':365, '3A':1095, '5A':1825};
+/* ───────── ejes ───────── */
+function pasoBonito(rangoV, objetivo){
+  const bruto = rangoV/objetivo;
+  const mag = 10**Math.floor(Math.log10(bruto));
+  const n = bruto/mag;
+  return (n<=1?1:n<=2?2:n<=5?5:10)*mag;
+}
+const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+function rotularX(t, fmt){
+  const d = new Date(t);
+  if (fmt==='hora')   return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  if (fmt==='dia')    return d.getDate()+' '+MES[d.getMonth()];
+  if (fmt==='mes')    return MES[d.getMonth()];
+  if (fmt==='mesaño') return MES[d.getMonth()]+" '"+String(d.getFullYear()).slice(2);
+  return String(d.getFullYear());
+}
+function marcasX(t0,t1,paso){
+  const out=[];
+  if (paso.M){
+    const d=new Date(t0); d.setDate(1); d.setHours(0,0,0,0);
+    while (d.getTime()<t1){ if(d.getTime()>=t0) out.push(d.getTime()); d.setMonth(d.getMonth()+paso.M); }
+  } else {
+    const ms = paso.h ? paso.h*3600000 : paso.d*86400000;
+    const ini = Math.ceil(t0/ms)*ms;
+    for (let t=ini; t<=t1; t+=ms) out.push(t);
+  }
+  return out;
+}
+
+/* ───────── dibujo ───────── */
+let ultimo = null;
 
 function serie(){
-  if (rango === '1D') return intradia.slice();
-  if (!historico) return [];
-  const corte = Date.now() - DIAS[rango]*86400000;
-  const s = historico.filter(d => d.t >= corte);
-  return s.length >= 2 ? s : historico.slice(-2);
+  const r = RANGOS.find(x=>x.id===rango);
+  if (r.fuente==='intra'){
+    const corte = Date.now()-86400000;
+    return intradia.filter(d=>d.t>=corte);
+  }
+  const b = barras.get(r.dias) || [];
+  const corte = Date.now()-r.dias*86400000;
+  return b.filter(d=>d.t>=corte).map(d=>({t:d.t,p:d.p}));
+}
+
+function nota(txt){
+  $('lienzo').querySelectorAll('svg').forEach(n=>n.remove());
+  let g = $('lienzo').querySelector('.gnota');
+  if (!g){ g=document.createElement('span'); g.className='gnota'; $('lienzo').prepend(g); }
+  g.textContent = txt; g.style.display='';
+  $('gvar').textContent=''; ultimo=null;
 }
 
 function dibujar(){
   const box = $('lienzo');
   const W = box.clientWidth, H = box.clientHeight;
+  if (W<40 || H<40) return;
   const s = serie();
+  const cfgR = RANGOS.find(x=>x.id===rango);
 
-  if (W < 20 || H < 20) return;
-  if (s.length < 2){
-    box.innerHTML = '<span class="gnota">' +
-      (rango === '1D' ? 'acumulando lecturas del día…' : 'sin histórico disponible') + '</span>';
-    $('gvar').textContent = '';
+  /* Nunca inventar una línea: menos de 3 puntos es "no hay dato". */
+  if (s.length < 3){
+    nota(cfgR.fuente==='intra' ? 'acumulando lecturas del día…' : 'sin datos para este periodo');
     return;
   }
+  const g = box.querySelector('.gnota'); if (g) g.style.display='none';
 
-  const ps = s.map(d => d.p);
-  let lo = Math.min(...ps), hi = Math.max(...ps);
-  const col = (hi - lo) || (hi * 0.01);
-  lo -= col*0.18; hi += col*0.18;
+  const M = {i: Math.min(58, W*0.07), d: 8, a: 10, b: 20};
+  const iw = W-M.i-M.d, ih = H-M.a-M.b;
 
-  const t0 = s[0].t, t1 = s[s.length-1].t, dt = (t1 - t0) || 1;
-  const x = d => ((d.t - t0) / dt) * W;
-  const y = d => H - ((d.p - lo) / (hi - lo)) * H;
+  const ps = s.map(d=>d.p);
+  const pmin = Math.min(...ps), pmax = Math.max(...ps);
+  const span = (pmax-pmin) || pmax*0.005;
+  const paso = pasoBonito(span*1.3, 3);
+  const lo = Math.floor((pmin-span*0.15)/paso)*paso;
+  const hi = Math.ceil((pmax+span*0.15)/paso)*paso;
 
-  let linea = '';
-  s.forEach((d,i) => { linea += (i ? 'L' : 'M') + x(d).toFixed(1) + ' ' + y(d).toFixed(1) + ' '; });
-  const area = 'M0 ' + H + ' L' + linea.slice(1) + 'L' + W + ' ' + H + ' Z';
+  const t0=s[0].t, t1=s[s.length-1].t, dt=(t1-t0)||1;
+  const X = t => M.i + ((t-t0)/dt)*iw;
+  const Y = p => M.a + ih - ((p-lo)/(hi-lo))*ih;
 
-  const fin = s[s.length-1];
-  const cambio = ((fin.p - s[0].p) / s[0].p) * 100;
-  const sube = cambio >= 0;
-  const tinte = sube ? '#3ED598' : '#F26D5B';
+  const cambio = ((s[s.length-1].p - s[0].p)/s[0].p)*100;
+  const sube = cambio>=0, tinte = sube?'#3ED598':'#F26D5B';
 
-  box.innerHTML =
-    '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<defs><linearGradient id="lav" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0%" stop-color="' + tinte + '" stop-opacity=".30"/>' +
-        '<stop offset="100%" stop-color="' + tinte + '" stop-opacity="0"/>' +
-      '</linearGradient></defs>' +
-      '<path d="' + area + '" fill="url(#lav)"/>' +
-      '<path d="' + linea.trim() + '" fill="none" stroke="' + tinte +
-        '" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' +
-      '<circle cx="' + x(fin).toFixed(1) + '" cy="' + y(fin).toFixed(1) + '" r="4" fill="' + tinte + '"/>' +
-    '</svg>';
+  /* cuadrícula + eje Y */
+  let rejilla='', etiqY='';
+  for (let p=lo; p<=hi+1e-9; p+=paso){
+    const y = Y(p).toFixed(1);
+    rejilla += `<line x1="${M.i}" y1="${y}" x2="${W-M.d}" y2="${y}" stroke="#81D8D0" stroke-opacity=".09" stroke-width="1"/>`;
+    etiqY   += `<text x="${M.i-7}" y="${y}" text-anchor="end" dominant-baseline="middle"
+                 fill="#8AA4BC" font-size="10" font-family="Space Grotesk,sans-serif">${Math.round(p).toLocaleString('en-US')}</text>`;
+  }
+  /* cuadrícula + eje X */
+  let etiqX='';
+  for (const t of marcasX(t0,t1,cfgR.paso)){
+    const x = X(t).toFixed(1);
+    rejilla += `<line x1="${x}" y1="${M.a}" x2="${x}" y2="${M.a+ih}" stroke="#81D8D0" stroke-opacity=".07" stroke-width="1"/>`;
+    etiqX   += `<text x="${x}" y="${H-6}" text-anchor="middle"
+                 fill="#8AA4BC" font-size="10" font-family="Space Grotesk,sans-serif">${rotularX(t,cfgR.fmt)}</text>`;
+  }
 
-  const gv = $('gvar');
-  gv.className = 'gvar ' + (sube ? 'up' : 'dn');
-  gv.textContent = (sube ? '▲ ' : '▼ ') + Math.abs(cambio).toFixed(1) + '% en ' + rango;
+  let linea='';
+  const puntos = s.map((d,i)=>{
+    const x=X(d.t), y=Y(d.p);
+    linea += (i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';
+    return {x,y,t:d.t,p:d.p};
+  });
+  const base = M.a+ih;
+  const area = `M${puntos[0].x.toFixed(1)} ${base} L`+linea.slice(1)+`L${puntos[puntos.length-1].x.toFixed(1)} ${base} Z`;
+  const fin = puntos[puntos.length-1];
+
+  box.querySelectorAll('svg').forEach(n=>n.remove());
+  box.insertAdjacentHTML('afterbegin',
+    `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="lav" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${tinte}" stop-opacity=".26"/>
+        <stop offset="100%" stop-color="${tinte}" stop-opacity="0"/></linearGradient></defs>
+      ${rejilla}
+      <path d="${area}" fill="url(#lav)"/>
+      <path d="${linea.trim()}" fill="none" stroke="${tinte}" stroke-width="2.2"
+            stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="${fin.x.toFixed(1)}" cy="${fin.y.toFixed(1)}" r="3.5" fill="${tinte}"/>
+      <line id="guia" x1="0" y1="${M.a}" x2="0" y2="${base}" stroke="${tinte}" stroke-opacity=".45"
+            stroke-width="1" style="display:none"/>
+      <circle id="tocado" r="4.5" fill="${tinte}" style="display:none"/>
+      ${etiqY}${etiqX}
+    </svg>`);
+
+  ultimo = {puntos, fmt:cfgR.fmt};
+  const gv=$('gvar'); gv.className='gvar '+(sube?'up':'dn');
+  gv.textContent = (sube?'▲ ':'▼ ')+Math.abs(cambio).toFixed(1)+'% en '+rango;
 }
 
-$('rangos').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  rango = b.dataset.r;
-  [...$('rangos').children].forEach(x => x.classList.toggle('on', x === b));
+/* ───────── toque sobre la gráfica ───────── */
+function tocar(e){
+  if (!ultimo) return;
+  const box=$('lienzo'), r=box.getBoundingClientRect();
+  const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  let mejor=ultimo.puntos[0];
+  for (const p of ultimo.puntos) if (Math.abs(p.x-x)<Math.abs(mejor.x-x)) mejor=p;
+  const svg=box.querySelector('svg'); if(!svg) return;
+  const guia=svg.querySelector('#guia'), pt=svg.querySelector('#tocado');
+  guia.setAttribute('x1',mejor.x); guia.setAttribute('x2',mejor.x); guia.style.display='';
+  pt.setAttribute('cx',mejor.x); pt.setAttribute('cy',mejor.y); pt.style.display='';
+  const gl=$('globo');
+  gl.querySelector('.gf').textContent = ultimo.fmt==='hora'
+    ? new Date(mejor.t).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false})
+    : new Date(mejor.t).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'});
+  gl.querySelector('.gp').textContent = '$'+usd(mejor.p);
+  gl.style.left = Math.max(60, Math.min(box.clientWidth-60, mejor.x))+'px';
+  gl.style.top  = mejor.y+'px';
+  gl.classList.add('ver');
+  clearTimeout(tocar.reloj);
+  tocar.reloj = setTimeout(soltar, 4000);
+}
+function soltar(){
+  $('globo').classList.remove('ver');
+  const svg=$('lienzo').querySelector('svg'); if(!svg) return;
+  const g=svg.querySelector('#guia'), p=svg.querySelector('#tocado');
+  if(g) g.style.display='none'; if(p) p.style.display='none';
+}
+$('lienzo').addEventListener('pointerdown', tocar);
+$('lienzo').addEventListener('pointermove', e => { if(e.buttons||e.pointerType==='touch') tocar(e); });
+$('lienzo').addEventListener('pointerup', () => setTimeout(soltar,2500));
+
+/* ───────── botones ───────── */
+function montarRangos(){
+  const cont=$('rangos'); cont.innerHTML='';
+  for (const r of RANGOS){
+    if (r.pro && !CFG.clave) continue;
+    const b=document.createElement('button');
+    b.dataset.r=r.id; b.textContent=r.id;
+    if (r.id===rango) b.classList.add('on');
+    cont.appendChild(b);
+  }
+}
+$('rangos').addEventListener('click', async e => {
+  const b=e.target.closest('button'); if(!b) return;
+  rango=b.dataset.r;
+  [...$('rangos').children].forEach(x=>x.classList.toggle('on',x===b));
+  const r=RANGOS.find(x=>x.id===rango);
+  if (r.fuente==='bars'){ nota('cargando…'); await traerBarras(r.dias); }
   dibujar();
 });
 
-if (window.ResizeObserver) new ResizeObserver(() => dibujar()).observe($('lienzo'));
+if (window.ResizeObserver) new ResizeObserver(()=>dibujar()).observe($('lienzo'));
 window.addEventListener('resize', dibujar);
 
 /* ───────── reloj ───────── */
 function tictac(){
-  const h = new Date();
-  $('reloj').textContent = h.toLocaleTimeString('es-MX',
-      {hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
-  $('fecha').textContent = h.toLocaleDateString('es-MX',
-      {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  const h=new Date();
+  $('reloj').textContent = h.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  $('fecha').textContent = h.toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 
-/* ══ Ancla: Silk cierra la página salvo que haya audio en curso ══ */
-function anclar(){
-  const sr = 8000, n = sr;
-  const buf = new ArrayBuffer(44 + n), v = new DataView(buf);
-  const txt = (o,s) => [...s].forEach((c,i) => v.setUint8(o+i, c.charCodeAt(0)));
+/* ── ancla: Silk cierra la página salvo que haya audio en curso ── */
+function anclarPantalla(){
+  const sr=8000,n=sr, buf=new ArrayBuffer(44+n), v=new DataView(buf);
+  const txt=(o,s)=>[...s].forEach((c,i)=>v.setUint8(o+i,c.charCodeAt(0)));
   txt(0,'RIFF'); v.setUint32(4,36+n,true); txt(8,'WAVEfmt '); v.setUint32(16,16,true);
   v.setUint16(20,1,true); v.setUint16(22,1,true); v.setUint32(24,sr,true);
   v.setUint32(28,sr,true); v.setUint16(32,1,true); v.setUint16(34,8,true);
   txt(36,'data'); v.setUint32(40,n,true);
-  for (let i=0;i<n;i++) v.setUint8(44+i,128);
-
-  const a = new Audio(URL.createObjectURL(new Blob([buf],{type:'audio/wav'})));
-  a.loop = true; a.volume = 0.001;
-  a.play().catch(()=>{});
-  setInterval(()=>{ if (a.paused) a.play().catch(()=>{}); }, 20000);
-
+  for(let i=0;i<n;i++) v.setUint8(44+i,128);
+  const a=new Audio(URL.createObjectURL(new Blob([buf],{type:'audio/wav'})));
+  a.loop=true; a.volume=0.001; a.play().catch(()=>{});
+  setInterval(()=>{ if(a.paused) a.play().catch(()=>{}); },20000);
   if (navigator.wakeLock) navigator.wakeLock.request('screen').catch(()=>{});
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && navigator.wakeLock) navigator.wakeLock.request('screen').catch(()=>{});
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden && navigator.wakeLock) navigator.wakeLock.request('screen').catch(()=>{});
   });
 }
-
-$('portada').addEventListener('click', () => {
-  $('portada').classList.add('ido');
-  anclar();
-  dibujar();
-});
+$('portada').addEventListener('click',()=>{ $('portada').classList.add('ido'); anclarPantalla(); dibujar(); });
 
 /* ───────── arranque ───────── */
-tictac();       setInterval(tictac, 1000);
-refrescarFx();  setInterval(refrescarFx, CFG.fxMs);
-cargarHistorico().then(refrescarOro);
-setInterval(cargarHistorico, CFG.histMs);
-document.addEventListener('visibilitychange', () => { if (!document.hidden) refrescarOro(); });
+async function arrancar(){
+  montarRangos();
+  tictac(); setInterval(tictac,1000);
+  refrescarFx(); setInterval(refrescarFx,CFG.fxMs);
+  await Promise.all([fijarAncla(), cargarIntradia(), traerBarras(30)]);
+  dibujar();
+  refrescarOro();
+  setInterval(async ()=>{ barras.clear(); await fijarAncla(); await traerBarras(RANGOS.find(x=>x.id===rango).dias); dibujar(); }, CFG.histMs);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refrescarOro(); });
+}
+arrancar();
 </script>
 </body>
 </html>
