@@ -204,9 +204,15 @@ body{display:flex;flex-direction:column;padding:2vh 2.4vw;user-select:none}
 <script>
 /* ═════════════════ AJUSTES ═════════════════ */
 const CFG = {
-  /* ─── PEGA AQUÍ TU LLAVE DE goldprice.dev ───
-     Entre las comillas, incluyendo el prefijo ga_live_
-     Con llave Pro se habilitan los rangos 6M, 1A, 3A y 5A. */
+  /* ─── PROXY (recomendado) ───
+     Pega aquí la URL de tu Worker de Cloudflare, sin diagonal final:
+       proxy: 'https://oro.tuusuario.workers.dev'
+     Con proxy configurado, BORRA la llave de abajo: ya vive en
+     Cloudflare y deja de estar expuesta en esta página. */
+  proxy: '',
+
+  /* ─── LLAVE DIRECTA (solo si no usas proxy) ───
+     Queda visible para cualquiera que abra el código de la página. */
   clave: 'ga_live_EmKrkD5osIhcnQxYir_o7ocAUYy0EmEXVqFUCdpb',
 
   /* Cadencia del oro con mercado activo. 25 s consume ~75% de la cuota
@@ -219,8 +225,50 @@ const CFG = {
   ley: { k24: 1.0, k14: 0.585, k10: 0.417 }
 };
 
-const API_ORO = 'https://api.goldprice.dev';
-const autoriza = () => CFG.clave ? {Authorization: 'Bearer ' + CFG.clave} : {};
+const API_ORO = (CFG.proxy || 'https://api.goldprice.dev').replace(/\/+$/,'');
+const VIA_PROXY = !!CFG.proxy;
+/* La cabecera Authorization dispara un sondeo OPTIONS que muchos
+   servidores no contestan, y el navegador corta con "Failed to fetch".
+   Probamos primero las variantes por parámetro, que no lo disparan. */
+const VARIANTES = [
+  { id:'api_key',  arma:u=>{const x=new URL(u); x.searchParams.set('api_key',CFG.clave); return [x,{}];} },
+  { id:'key',      arma:u=>{const x=new URL(u); x.searchParams.set('key',CFG.clave);     return [x,{}];} },
+  { id:'token',    arma:u=>{const x=new URL(u); x.searchParams.set('token',CFG.clave);   return [x,{}];} },
+  { id:'bearer',   arma:u=>[new URL(u), {Authorization:'Bearer '+CFG.clave}] },
+  { id:'x-api-key',arma:u=>[new URL(u), {'X-API-Key':CFG.clave}] },
+  { id:'anónimo',  arma:u=>[new URL(u), {}] }
+];
+let AUTH = null;
+
+async function detectarAuth(){
+  if (VIA_PROXY){ AUTH = {id:'proxy', arma:u=>[new URL(u),{}]}; return AUTH; }
+  const prueba = API_ORO + '/v1/spot/XAU-USD-SPOT?include=stats';
+  let respaldo = null;
+  for (const v of VARIANTES){
+    if (v.id !== 'anónimo' && !CFG.clave) continue;
+    try{
+      const [u,h] = v.arma(prueba);
+      const r = await fetch(u,{headers:h, cache:'no-store'});
+      if (!r.ok){ ULTIMO_ERROR.set('auth:'+v.id,'HTTP '+r.status); continue; }
+      const j = await r.json();
+      if (!Number.isFinite(+j.price)) continue;
+      /* open_price solo llega si la llave fue aceptada de verdad */
+      if (Number.isFinite(+j.open_price)){ AUTH = v; return v; }
+      if (!respaldo) respaldo = v;
+    }catch(e){ ULTIMO_ERROR.set('auth:'+v.id, String(e.message||e).slice(0,30)); }
+  }
+  AUTH = respaldo;
+  return AUTH;
+}
+
+function pedir(url, extras = {}){
+  const base = new URL(url);
+  for (const [k,v] of Object.entries(extras)) base.searchParams.set(k,v);
+  if (!AUTH) return fetch(base,{cache:'no-store'});
+  const [u,h] = AUTH.arma(base.toString());
+  return fetch(u,{headers:h, cache:'no-store'});
+}
+const autoriza = () => (AUTH && AUTH.id==='bearer') ? {Authorization:'Bearer '+CFG.clave} : {};
 
 /* Con llave, el spot sale de la MISMA serie que la gráfica y el ancla:
    XAU-USD-SPOT. Sin llave cae a fuentes gratuitas, que cotizan futuros
@@ -228,7 +276,7 @@ const autoriza = () => CFG.clave ? {Authorization: 'Bearer ' + CFG.clave} : {};
 const FUENTES_ORO = [
   /* /v1/spot devuelve la fila plana; include=stats agrega apertura,
      máximo, mínimo, cierre previo y el % del día ya calculado. */
-  { nombre:'goldprice', minMs:20000, auth:true,
+  { nombre:'goldprice', minMs:20000, auth:true, gp:true,
     url: API_ORO + '/v1/spot/XAU-USD-SPOT?include=stats',
     leer: j => ({ n:+j.price, abre:+j.open_price, chp:+j.chp, prev:+j.prev_close_price }) },
   { nombre:'gold-api', minMs:15000, url:'https://api.gold-api.com/price/XAU', leer: j => +j.price },
@@ -309,7 +357,7 @@ async function probar(fuentes){
     const m = marca(f);
     if (Date.now() < m.libre) continue;
     try{
-      const r = await fetch(f.url,{cache:'no-store', headers: f.auth ? autoriza() : {}});
+      const r = f.gp ? await pedir(f.url) : await fetch(f.url,{cache:'no-store'});
       if (!r.ok) ULTIMO_ERROR.set(f.url, 'HTTP '+r.status);
       if (r.status===429 || r.status===403){
         m.castigo = Math.min((m.castigo||150000)*2, 3600000);
@@ -353,7 +401,7 @@ async function traerBarras(idRango){
         const u = new URL(API_ORO + ruta);
         u.search = new URLSearchParams({symbol:'XAU-USD-SPOT', interval:r.intervalo,
           from:iso(desde), to:iso(new Date()), limit:'5000', ...(cursor?{cursor}:{})}).toString();
-        const resp = await fetch(u, {headers:autoriza(), cache:'no-store'});
+        const resp = await pedir(u.toString());
         sumar();
         if (!resp.ok){ fallo='HTTP '+resp.status; break; }
         const j = await resp.json();
@@ -376,6 +424,19 @@ async function traerBarras(idRango){
 
 /* El ancla ya no se calcula: la API la reporta.
    open_price es la apertura de la sesión en curso (open_time = medianoche UTC). */
+/* Si goldprice no es alcanzable desde el navegador, el ancla sale de
+   aurumrates, que publica cierre previo del mismo mercado de futuros
+   que gold-api: los dos números quedan consistentes entre sí. */
+async function anclaRespaldo(){
+  if (ancla) return;
+  try{
+    const r = await fetch('https://aurumrates.com/api/v1/spot?metals=gold',{cache:'no-store'});
+    if (!r.ok) return;
+    const g = (await r.json())?.data?.gold;
+    if (g && +g.prev_close > 0) ancla = {p:+g.prev_close, tipo:'cierre previo'};
+  }catch(e){}
+}
+
 function anclarDesde(extra){
   if (!extra) return;
   if (Number.isFinite(extra.abre) && extra.abre > 0){ ancla = {p:extra.abre, tipo:'apertura'}; return; }
@@ -391,7 +452,8 @@ async function refrescarOro(){
   if (!oro){ $('foco').classList.add('frio'); $('sello').textContent='sin señal'; programarOro(); return; }
   $('foco').classList.remove('frio');
   const pct = usadoPct();
-  $('sello').textContent = oro.nombre + (pct !== null && CFG.clave ? ' · ' + pct + '%' : '');
+  const via = (oro.nombre==='goldprice' && AUTH) ? '·'+AUTH.id : '';
+  $('sello').textContent = oro.nombre + via + (pct !== null && CFG.clave ? ' · ' + pct + '%' : '');
 
   const onza = oro.n;
   anclarDesde(oro.extra);
@@ -645,8 +707,10 @@ $('portada').addEventListener('click',()=>{ $('portada').classList.add('ido'); a
 async function arrancar(){
   montarRangos();
   tictac(); setInterval(tictac,1000);
+  await detectarAuth();
   refrescarFx(); setInterval(refrescarFx,CFG.fxMs);
   await refrescarOro();
+  await anclaRespaldo(); setInterval(()=>{ if(!ancla) anclaRespaldo(); }, 3600000);
   await traerBarras(rango);
   dibujar();
   setInterval(async ()=>{ barras.clear(); await traerBarras(rango); dibujar(); }, CFG.histMs);
