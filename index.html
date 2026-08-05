@@ -427,6 +427,23 @@ async function traerBarras(idRango){
 /* Si goldprice no es alcanzable desde el navegador, el ancla sale de
    aurumrates, que publica cierre previo del mismo mercado de futuros
    que gold-api: los dos números quedan consistentes entre sí. */
+/* open_price no viene poblado en /v1/spot para este símbolo.
+   La barra diaria en formación sí trae la apertura de la sesión:
+   is_closed:false = sesión en curso; true = mercado cerrado. */
+async function anclaPorBarra(){
+  try{
+    const r = await pedir(API_ORO + '/v1/bars/latest?symbol=XAU-USD-SPOT&interval=1d');
+    sumar();
+    if (!r.ok) return false;
+    const b = (await r.json()).bar;
+    if (!b) return false;
+    const abre = parseFloat(b.open);
+    if (!(abre > 0)) return false;
+    ancla = { p: abre, tipo: b.is_closed ? 'apertura sesión previa' : 'apertura' };
+    return true;
+  }catch(e){ return false; }
+}
+
 async function anclaRespaldo(){
   if (ancla) return;
   try{
@@ -453,7 +470,7 @@ async function refrescarOro(){
   $('foco').classList.remove('frio');
   const pct = usadoPct();
   const via = (oro.nombre==='goldprice' && AUTH) ? '·'+AUTH.id : '';
-  $('sello').textContent = oro.nombre + via + (pct !== null && CFG.clave ? ' · ' + pct + '%' : '');
+  $('sello').textContent = oro.nombre + via + (pct !== null && (CFG.clave || VIA_PROXY) ? ' · ' + pct + '%' : '');
 
   const onza = oro.n;
   anclarDesde(oro.extra);
@@ -657,7 +674,7 @@ $('lienzo').addEventListener('pointerup', () => setTimeout(soltar,2500));
 function montarRangos(){
   const cont=$('rangos'); cont.innerHTML='';
   for (const r of RANGOS){
-    if (r.pro && !CFG.clave) continue;
+    if (r.pro && !CFG.clave && !VIA_PROXY) continue;
     const b=document.createElement('button');
     b.dataset.r=r.id; b.textContent=r.id;
     if (r.id===rango) b.classList.add('on');
@@ -710,7 +727,10 @@ async function arrancar(){
   await detectarAuth();
   refrescarFx(); setInterval(refrescarFx,CFG.fxMs);
   await refrescarOro();
-  await anclaRespaldo(); setInterval(()=>{ if(!ancla) anclaRespaldo(); }, 3600000);
+  await anclaPorBarra();
+  if (!ancla) await anclaRespaldo();
+  /* la apertura cambia una vez al día; revisarla cada 10 min basta */
+  setInterval(async ()=>{ if (!await anclaPorBarra()) anclaRespaldo(); }, 600000);
   await traerBarras(rango);
   dibujar();
   setInterval(async ()=>{ barras.clear(); await traerBarras(rango); dibujar(); }, CFG.histMs);
