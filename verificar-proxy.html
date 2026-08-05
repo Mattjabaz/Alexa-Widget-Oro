@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="es-MX"><head><meta charset="utf-8"><title>Prueba del proxy</title>
+<style>body{background:#0A1A2F;color:#F4EFE6;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:28px}
+h1{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:#81D8D0;margin:0 0 18px}
+div{margin:10px 0}.ok{color:#3ED598;font-weight:700}.no{color:#F26D5B;font-weight:700}
+pre{background:#12293F;padding:10px;border-radius:4px;overflow:auto;font-size:12px;color:#8AA4BC}</style>
+</head><body><h1>Prueba del proxy</h1><div id="s">spot: probando…</div><div id="b">barras: probando…</div><pre id="d"></pre>
+<script>
+const P='https://oro.matisaidml.workers.dev';
+const hoy=new Date().toISOString().slice(0,10), atras=new Date(Date.now()-40*864e5).toISOString().slice(0,10);
+(async()=>{
+ const det=[];
+ try{const r=await fetch(P+'/v1/spot/XAU-USD-SPOT?include=stats');const j=await r.json();
+  const p=+j.price,a=+j.open_price;
+  s.innerHTML='spot: '+(Number.isFinite(p)?'<span class=ok>OK</span> $'+p+(Number.isFinite(a)?' · apertura $'+a:' · <span class=no>SIN apertura</span>'):'<span class=no>falla</span>');
+  det.push(JSON.stringify(j,null,1).slice(0,600));
+ }catch(e){s.innerHTML='spot: <span class=no>'+e.message+'</span>';det.push('spot: '+e)}
+ try{const r=await fetch(P+'/v1/bars?symbol=XAU-USD-SPOT&interval=1d&from='+atras+'&to='+hoy+'&limit=100');
+  const j=await r.json();const n=(j.bars||[]).length;
+  b.innerHTML='barras: '+(n?'<span class=ok>OK</span> '+n+' · tier '+(j.meta?.tier||'?'):'<span class=no>vacío</span>');
+  det.push('bars meta: '+JSON.stringify(j.meta));
+ }catch(e){b.innerHTML='barras: <span class=no>'+e.message+'</span>';det.push('bars: '+e)}
+ d.textContent=det.join('\n\n');
+})();
+</script></body></html>
