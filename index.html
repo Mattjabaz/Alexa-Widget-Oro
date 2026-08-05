@@ -13,97 +13,113 @@
   --marino-claro:#12293F;
   --linea:#1E3A56;
   --tiffany:#81D8D0;
-  --tiffany-hondo:#2E8B86;
   --blanco:#FFFFFF;
   --tenue:#8AA4BC;
+  --verde:#3ED598;
+  --rojo:#F26D5B;
   --num:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
   --gra:'Bodoni Moda',Georgia,serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:var(--marino);color:var(--blanco);
   font-family:var(--num);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
-body{display:flex;flex-direction:column;padding:2.2vh 2.6vw;user-select:none;cursor:none}
+body{display:flex;flex-direction:column;padding:2vh 2.4vw;user-select:none}
 
 /* ── cabecera ── */
 .cab{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:1em}
-.marca{display:flex;align-items:center;gap:.75em}
-.marca img{height:clamp(30px,6vh,54px);width:auto;display:block}
-.titulo{font-family:var(--gra);font-size:clamp(14px,2.7vh,28px);letter-spacing:.19em;
+.marca{display:flex;align-items:center;gap:.7em}
+.marca img{height:clamp(28px,5.6vh,50px);width:auto;display:block}
+.titulo{font-family:var(--gra);font-size:clamp(13px,2.5vh,26px);letter-spacing:.19em;
   text-transform:uppercase;line-height:1.1}
 .titulo em{font-style:italic;color:var(--tiffany)}
-.estado{display:flex;align-items:center;gap:.6em;font-size:clamp(10px,1.7vh,16px);
+.estado{display:flex;align-items:center;gap:.55em;font-size:clamp(9px,1.6vh,15px);
   letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
 .foco{width:.55em;height:.55em;border-radius:50%;background:var(--tiffany);
   animation:latir 4s ease-out infinite}
-.foco.frio{background:var(--tenue);animation:none}
+.foco.frio{background:var(--rojo);animation:none}
 @keyframes latir{0%{box-shadow:0 0 0 0 rgba(129,216,208,.45)}70%,100%{box-shadow:0 0 0 .55em rgba(129,216,208,0)}}
-.regla{flex:0 0 auto;height:1px;margin-top:1.4vh;
+.regla{flex:0 0 auto;height:1px;margin-top:1.2vh;
   background:linear-gradient(90deg,var(--tiffany),var(--linea) 50%,transparent)}
 
 /* ── mercado ── */
-.mercado{flex:0 0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:2.6vw;padding:2.2vh 0 2.4vh}
-.rotulo{font-size:clamp(9px,1.65vh,15px);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--tenue);margin-bottom:.4em}
-.mercado .cifra{font-size:clamp(34px,8.6vh,76px);font-weight:500;line-height:.92;letter-spacing:-.025em}
+.mercado{flex:0 0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:2.4vw;padding:2.4vh 0 2.6vh}
+.rotulo{font-size:clamp(9px,1.55vh,14px);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--tenue);margin-bottom:.35em}
+.mercado .cifra{font-size:clamp(30px,7.4vh,66px);font-weight:500;line-height:.92;letter-spacing:-.025em}
 .sig{color:var(--tiffany);opacity:.72;font-size:.5em;vertical-align:.32em;margin-right:.1em}
-.pie{display:flex;align-items:baseline;gap:.8em;margin-top:.5em;
-  font-size:clamp(10px,1.8vh,17px);color:var(--tenue)}
-.delta{font-weight:700}
-.delta.up{color:var(--tiffany)} .delta.dn{color:var(--blanco);opacity:.7}
+.pie{display:flex;align-items:baseline;gap:.8em;margin-top:.45em;
+  font-size:clamp(10px,1.7vh,16px);color:var(--tenue)}
+.delta{font-weight:700;letter-spacing:.01em}
+.delta.up{color:var(--verde)} .delta.dn{color:var(--rojo)}
 
 /* ── quilates ── */
-.esp{flex-shrink:0}
-.esp.arriba{flex:1 0 0}
-.esp.abajo{flex:3 0 0}
-.leyes{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw}
+.leyes{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5vw}
 .ley{position:relative;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:31vh;
+  justify-content:center;min-height:25vh;
   background:var(--marino-claro);border:1px solid var(--linea);border-radius:5px;
-  padding:2vh 1.6vw;overflow:hidden}
+  padding:1.8vh 1.4vw;overflow:hidden}
 .ley::before{content:'';position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(158deg,rgba(129,216,208,.10),transparent 46%)}
-.motivo{position:absolute;right:-2%;bottom:-8%;width:52%;opacity:.14;pointer-events:none}
+.motivo{position:absolute;right:-2%;bottom:-8%;width:50%;opacity:.13;pointer-events:none}
 .motivo svg{width:100%;height:auto;display:block}
-.punzon{position:absolute;top:1.7vh;left:1.4vw;font-family:var(--gra);font-weight:500;
-  font-size:clamp(16px,3.3vh,34px);letter-spacing:.09em;line-height:1;color:var(--tiffany);
-  border:2px solid var(--tiffany);border-radius:2.2em;padding:.34em .8em .42em}
+.punzon{position:absolute;top:1.5vh;left:1.2vw;font-family:var(--gra);font-weight:500;
+  font-size:clamp(15px,3.1vh,32px);letter-spacing:.09em;line-height:1;color:var(--tiffany);
+  border:2px solid var(--tiffany);border-radius:2.2em;padding:.32em .78em .4em}
 .dato{position:relative;text-align:center}
-.ley .cifra{font-size:clamp(34px,9.2vh,82px);font-weight:700;line-height:.92;letter-spacing:-.035em}
+.ley .cifra{font-size:clamp(30px,8.4vh,74px);font-weight:700;line-height:.92;letter-spacing:-.035em}
 .ley .sig{font-size:.46em;vertical-align:.42em;margin-right:.08em}
-.ley .unidad{font-size:clamp(9px,1.6vh,15px);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--tenue);margin-top:.55em}
-.destello{animation:destellar 1.2s ease-out}
-@keyframes destellar{0%{color:var(--tiffany);text-shadow:0 0 24px rgba(129,216,208,.40)}100%{}}
+.ley .unidad{font-size:clamp(8px,1.5vh,14px);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--tenue);margin-top:.5em}
+.destello{animation:destellar 1s ease-out}
+@keyframes destellar{0%{color:var(--tiffany)}100%{}}
+
+/* ── gráfica: vive sobre el fondo, sin caja ── */
+.grafica{flex:1 1 auto;display:flex;flex-direction:column;min-height:14vh;padding-top:2vh}
+.gcab{flex:0 0 auto;display:flex;align-items:baseline;justify-content:space-between;
+  gap:1em;margin-bottom:.7vh}
+.gizq{display:flex;align-items:baseline;gap:.9em}
+.gtit{font-size:clamp(9px,1.55vh,14px);letter-spacing:.22em;text-transform:uppercase;color:var(--tenue)}
+.gvar{font-size:clamp(11px,1.85vh,17px);font-weight:700}
+.gvar.up{color:var(--verde)} .gvar.dn{color:var(--rojo)}
+.rangos{display:flex;gap:.35em}
+.rangos button{font-family:var(--num);font-size:clamp(9px,1.5vh,14px);font-weight:500;
+  letter-spacing:.1em;color:var(--tenue);background:transparent;
+  border:1px solid var(--linea);border-radius:2em;padding:.36em .85em;cursor:pointer}
+.rangos button.on{color:var(--marino);background:var(--tiffany);border-color:var(--tiffany)}
+.lienzo{flex:1 1 auto;position:relative;min-height:0}
+.lienzo svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gnota{position:absolute;left:0;top:50%;transform:translateY(-50%);
+  font-size:clamp(9px,1.5vh,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
 
 /* ── zócalo ── */
 .zocalo{flex:0 0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:1em;
-  margin-top:0;padding-top:1.4vh;border-top:1px solid var(--linea);
-  font-size:clamp(9px,1.65vh,15px);letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+  margin-top:1.2vh;padding-top:1.2vh;border-top:1px solid var(--linea);
+  font-size:clamp(9px,1.55vh,14px);letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
 .zocalo .der{text-align:right}
-.zocalo .med{text-align:center;color:var(--tenue)}
+.zocalo .med{text-align:center}
 .zocalo .med b{color:var(--tiffany);font-weight:500;letter-spacing:.06em}
 
 /* ── portada ── */
 #portada{position:fixed;inset:0;z-index:9;background:var(--marino);cursor:pointer;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1em}
-#portada img{height:clamp(64px,16vh,130px);width:auto}
-#portada .lema{font-family:var(--gra);font-size:clamp(18px,4vh,38px);letter-spacing:.2em;
-  text-transform:uppercase;color:var(--blanco)}
+#portada img{height:clamp(60px,15vh,124px);width:auto}
+#portada .lema{font-family:var(--gra);font-size:clamp(17px,3.8vh,36px);letter-spacing:.2em;
+  text-transform:uppercase}
 #portada .lema em{font-style:italic;color:var(--tiffany)}
-#portada .instr{font-size:clamp(11px,1.9vh,18px);letter-spacing:.2em;text-transform:uppercase;color:var(--tenue)}
+#portada .instr{font-size:clamp(10px,1.8vh,17px);letter-spacing:.2em;text-transform:uppercase;color:var(--tenue)}
 #portada.ido{display:none}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 @media (max-aspect-ratio:1/1){
-  .mercado{grid-template-columns:1fr;gap:1.8vh}
-  .leyes{grid-template-columns:1fr;gap:1vh}
+  .mercado{grid-template-columns:1fr;gap:1.6vh;padding:1.8vh 0}
+  .leyes{grid-template-columns:1fr;gap:.9vh}
   .ley{flex-direction:row;align-items:center;justify-content:space-between;min-height:0}
-  .punzon{position:static;font-size:clamp(15px,2.8vh,28px)}
+  .punzon{position:static;font-size:clamp(14px,2.6vh,26px)}
   .dato{text-align:right}
   .ley .unidad{display:none}
-  .motivo{width:26%}
-  .esp{display:none}
-  .zocalo{grid-template-columns:1fr;text-align:center;gap:.3em}
+  .motivo{width:24%}
+  .grafica{min-height:18vh}
+  .zocalo{grid-template-columns:1fr;text-align:center;gap:.25em}
   .zocalo .der{text-align:center}
 }
 </style>
@@ -118,7 +134,6 @@ body{display:flex;flex-direction:column;padding:2.2vh 2.6vw;user-select:none;cur
   <div class="estado"><span class="foco" id="foco"></span><span id="sello">conectando</span></div>
 </div>
 <div class="regla"></div>
-<div class="esp arriba"></div>
 
 <div class="mercado">
   <div>
@@ -129,7 +144,7 @@ body{display:flex;flex-direction:column;padding:2.2vh 2.6vw;user-select:none;cur
   <div>
     <div class="rotulo">Tipo de cambio</div>
     <div class="cifra"><span class="sig">$</span><span id="fx">&mdash;</span></div>
-    <div class="pie"><span>MXN por USD</span></div>
+    <div class="pie"><span>MXN por USD</span><span id="fxsello" style="opacity:.75"></span></div>
   </div>
 </div>
 
@@ -197,7 +212,23 @@ body{display:flex;flex-direction:column;padding:2.2vh 2.6vw;user-select:none;cur
 
 </div>
 
-<div class="esp abajo"></div>
+<div class="grafica">
+  <div class="gcab">
+    <div class="gizq">
+      <span class="gtit">Oro &middot; histórico USD/oz</span>
+      <span class="gvar" id="gvar"></span>
+    </div>
+    <div class="rangos" id="rangos">
+      <button data-r="1D">1D</button>
+      <button data-r="1M">1M</button>
+      <button data-r="6M">6M</button>
+      <button data-r="1A">1A</button>
+      <button data-r="3A">3A</button>
+      <button data-r="5A" class="on">5A</button>
+    </div>
+  </div>
+  <div class="lienzo" id="lienzo"><span class="gnota" id="gnota">cargando histórico…</span></div>
+</div>
 
 <div class="zocalo">
   <span id="fecha">&mdash;</span>
@@ -212,39 +243,82 @@ body{display:flex;flex-direction:column;padding:2.2vh 2.6vw;user-select:none;cur
 </div>
 
 <script>
-/* ══════════ AJUSTES ══════════ */
+/* ══════════════ AJUSTES ══════════════ */
 const CFG = {
-  refrescoMs: 60000,
+  /* Cadencia del oro. 10 s es el extremo agresivo: son ~8,600 llamadas al día.
+     Si ves que el sello de arriba salta seguido a otra fuente, sube este número
+     a 15000 o 20000 y el problema desaparece. Nada más se toca. */
+  oroMsBase: 10000,
+  fxMs: 45000,               // 80 llamadas/hora: bajo el tope anónimo de 100/hora
+  histMs: 21600000,          // relee el histórico cada 6 h (la fuente publica 1 vez al día)
   ozTroyGramos: 31.1034768,
   ley: { k24: 1.0, k14: 0.585, k10: 0.417 }
 };
 
-/* Fuentes en cascada: prueba una por una hasta que alguna responda */
+/* Fuentes en cascada. minMs = intervalo mínimo que respeta cada proveedor.
+   Mientras la primera responda, las demás nunca se tocan. */
 const FUENTES_ORO = [
-  { nombre:'gold-api',      url:'https://api.gold-api.com/price/XAU',
-    leer: j => +j.price },
-  { nombre:'goldprice.dev', url:'https://goldprice.dev/v1/prices?symbol=XAU-USD-SPOT',
-    leer: j => +(j.price ?? j.data?.price ?? j.prices?.[0]?.price) },
-  { nombre:'xaus',          url:'https://xaus.com/api/v1/price',
-    leer: j => +(j.price ?? j.price_usd ?? j.gold?.price) }
+  { nombre:'gold-api', minMs:10000,
+    url:'https://api.gold-api.com/price/XAU', leer: j => +j.price },
+  { nombre:'xaus', minMs:30000,              // su política pide caché de 30 s
+    url:'https://xaus.com/api/v1/price',
+    leer: j => +(j.spot_usd_oz ?? j.xau?.price ?? j.price) },
+  { nombre:'goldprice', minMs:300000,        // tramo gratuito angosto: solo respaldo
+    url:'https://goldprice.dev/v1/prices?symbol=XAU-USD-SPOT',
+    leer: j => +(j.price ?? j.data?.price ?? j.prices?.[0]?.price) }
 ];
 const FUENTES_FX = [
-  { nombre:'er-api',      url:'https://open.er-api.com/v6/latest/USD', leer: j => +j.rates.MXN },
-  { nombre:'frankfurter', url:'https://api.frankfurter.app/latest?from=USD&to=MXN', leer: j => +j.rates.MXN }
+  { nombre:'interbancario', minMs:45000,     // media de mercado en vivo, misma base que XE
+    url:'https://api.exchangerate.dev/v1/latest/USD?symbols=MXN',
+    leer: j => +(j.rates?.MXN ?? j.data?.rates?.MXN ?? j.quotes?.USDMXN) },
+  { nombre:'er-api', minMs:3600000,
+    url:'https://open.er-api.com/v6/latest/USD', leer: j => +j.rates.MXN },
+  { nombre:'frankfurter', minMs:3600000,
+    url:'https://api.frankfurter.app/latest?from=USD&to=MXN', leer: j => +j.rates.MXN }
 ];
+const URL_HIST     = 'https://freegoldapi.com/data/latest.json';
+const URL_INTRADIA = 'https://xaus.com/api/v1/intraday?symbol=xau&hours=24';
 
 const $ = id => document.getElementById(id);
 const mx = (n, d = 2) => n.toLocaleString('es-MX', {minimumFractionDigits:d, maximumFractionDigits:d});
-let base = null;
+
+let tcActual = null, cierreAnterior = null;
+let historico = null;          // [{t,p}] diario/mensual
+let intradia  = [];            // [{t,p}] muestras del día
+let rango = '5A';
+
+/* ───────── red con freno ─────────
+   Cada fuente lleva su propio reloj. Si devuelve 429 o 403 entra en castigo
+   creciente (5, 10, 20… hasta 60 min) y se deja de tocar. Si falla por otra
+   razón, descansa 1 min y va duplicando. Así un tope temporal nunca escala. */
+const RELOJ = new Map();
+const marca = f => {
+  if (!RELOJ.has(f.url)) RELOJ.set(f.url, {libre:0, fallos:0, castigo:0});
+  return RELOJ.get(f.url);
+};
 
 async function probar(fuentes){
   for (const f of fuentes){
+    const m = marca(f);
+    if (Date.now() < m.libre) continue;          // aún en su intervalo o castigada
     try{
       const r = await fetch(f.url, {cache:'no-store'});
-      if (!r.ok) continue;
+      if (r.status === 429 || r.status === 403){
+        m.castigo = Math.min((m.castigo || 150000) * 2, 3600000);
+        m.libre = Date.now() + m.castigo;
+        console.warn('freno en', f.nombre, Math.round(m.castigo/60000) + ' min');
+        continue;
+      }
+      if (!r.ok) throw new Error(r.status);
       const n = f.leer(await r.json());
-      if (Number.isFinite(n) && n > 0) return {n, nombre:f.nombre};
-    }catch(e){}
+      if (!Number.isFinite(n) || n <= 0) throw new Error('dato');
+      m.fallos = 0; m.castigo = 0;
+      m.libre = Date.now() + f.minMs;            // respeta su cadencia mínima
+      return {n, nombre:f.nombre};
+    }catch(e){
+      m.fallos++;
+      m.libre = Date.now() + Math.min(60000 * 2**(m.fallos-1), 900000);
+    }
   }
   return null;
 }
@@ -256,37 +330,159 @@ function pintar(id, txt){
   el.classList.remove('destello'); void el.offsetWidth; el.classList.add('destello');
 }
 
-async function actualizar(){
-  const [oro, fx] = await Promise.all([probar(FUENTES_ORO), probar(FUENTES_FX)]);
+/* ───────── precios ───────── */
+let ultimaOnza = null, quietas = 0, intervaloOro = CFG.oroMsBase, temporizador = null;
 
-  if (!oro || !fx){
-    $('foco').classList.add('frio');
-    $('sello').textContent = 'sin señal';
-    return;
+async function refrescarOro(){
+  if (document.hidden){ programarOro(); return; }   // pantalla oculta: no se gastan llamadas
+  const oro = await probar(FUENTES_ORO);
+  if (!oro){
+    $('foco').classList.add('frio'); $('sello').textContent = 'sin señal';
+    programarOro(); return;
   }
   $('foco').classList.remove('frio');
+  $('sello').textContent = oro.nombre;
 
-  const onza = oro.n, tc = fx.n;
-  const g24 = (onza / CFG.ozTroyGramos) * tc;
-
+  const onza = oro.n;
   pintar('xau', onza.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-  pintar('fx',  mx(tc, 4));
-  pintar('g24', mx(g24 * CFG.ley.k24));
-  pintar('g14', mx(g24 * CFG.ley.k14));
-  pintar('g10', mx(g24 * CFG.ley.k10));
 
-  if (base === null) base = onza;
-  const d = ((onza - base) / base) * 100;
+  if (tcActual){
+    const g24 = (onza / CFG.ozTroyGramos) * tcActual;
+    pintar('g24', mx(g24 * CFG.ley.k24));
+    pintar('g14', mx(g24 * CFG.ley.k14));
+    pintar('g10', mx(g24 * CFG.ley.k10));
+  }
+
+  if (cierreAnterior === null) cierreAnterior = onza;
+  const d = ((onza - cierreAnterior) / cierreAnterior) * 100;
   const el = $('delta');
   el.className = 'delta ' + (d >= 0 ? 'up' : 'dn');
   el.textContent = (d >= 0 ? '▲ ' : '▼ ') + Math.abs(d).toFixed(2) + '%';
 
-  $('sello').textContent = oro.nombre;
-  $('ultima').textContent = new Date().toLocaleTimeString('es-MX',
+  const ahora = new Date();
+  intradia.push({t: ahora.getTime(), p: onza});
+  if (intradia.length > 3000) intradia.shift();
+  if (rango === '1D') dibujar();
+
+  $('ultima').textContent = ahora.toLocaleTimeString('es-MX',
       {hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+
+  /* Mercado quieto (fin de semana, madrugada): aflojar el ritmo.
+     En cuanto el precio se mueva, vuelve a 10 s. */
+  quietas = (onza === ultimaOnza) ? quietas + 1 : 0;
+  ultimaOnza = onza;
+  intervaloOro = quietas >= 18 ? 120000 : quietas >= 6 ? 30000 : CFG.oroMsBase;
+  programarOro();
 }
 
-/* reloj y fecha corren aparte, cada segundo */
+function programarOro(){
+  clearTimeout(temporizador);
+  temporizador = setTimeout(refrescarOro, intervaloOro);
+}
+
+async function refrescarFx(){
+  if (document.hidden) return;
+  const fx = await probar(FUENTES_FX);
+  if (!fx) return;
+  tcActual = fx.n;
+  pintar('fx', mx(tcActual, 4));
+  $('fxsello').textContent = fx.nombre === 'interbancario' ? 'interbancario' : 'referencia diaria';
+}
+
+/* ───────── histórico ───────── */
+async function cargarHistorico(){
+  try{
+    const r = await fetch(URL_HIST, {cache:'no-store'});
+    const j = await r.json();
+    historico = j.map(d => ({t: Date.parse(d.date + 'T00:00:00Z'), p: +d.price}))
+                 .filter(d => Number.isFinite(d.t) && d.p > 0)
+                 .sort((a,b) => a.t - b.t);
+    const ult = historico[historico.length - 1];
+    if (ult) cierreAnterior = ult.p;
+  }catch(e){ historico = []; }
+
+  try{
+    const r = await fetch(URL_INTRADIA, {cache:'no-store'});
+    const j = await r.json();
+    const pts = j.points ?? j.data ?? [];
+    const sem = pts.map(d => ({t: typeof d.t === 'number' ? (d.t < 1e12 ? d.t*1000 : d.t) : Date.parse(d.t),
+                               p: +(d.p ?? d.price)}))
+                   .filter(d => Number.isFinite(d.t) && d.p > 0);
+    if (sem.length) intradia = sem.concat(intradia).sort((a,b)=>a.t-b.t);
+  }catch(e){}
+
+  dibujar();
+}
+
+const DIAS = {'1M':30, '6M':182, '1A':365, '3A':1095, '5A':1825};
+
+function serie(){
+  if (rango === '1D') return intradia.slice();
+  if (!historico) return [];
+  const corte = Date.now() - DIAS[rango]*86400000;
+  const s = historico.filter(d => d.t >= corte);
+  return s.length >= 2 ? s : historico.slice(-2);
+}
+
+function dibujar(){
+  const box = $('lienzo');
+  const W = box.clientWidth, H = box.clientHeight;
+  const s = serie();
+
+  if (W < 20 || H < 20) return;
+  if (s.length < 2){
+    box.innerHTML = '<span class="gnota">' +
+      (rango === '1D' ? 'acumulando lecturas del día…' : 'sin histórico disponible') + '</span>';
+    $('gvar').textContent = '';
+    return;
+  }
+
+  const ps = s.map(d => d.p);
+  let lo = Math.min(...ps), hi = Math.max(...ps);
+  const col = (hi - lo) || (hi * 0.01);
+  lo -= col*0.18; hi += col*0.18;
+
+  const t0 = s[0].t, t1 = s[s.length-1].t, dt = (t1 - t0) || 1;
+  const x = d => ((d.t - t0) / dt) * W;
+  const y = d => H - ((d.p - lo) / (hi - lo)) * H;
+
+  let linea = '';
+  s.forEach((d,i) => { linea += (i ? 'L' : 'M') + x(d).toFixed(1) + ' ' + y(d).toFixed(1) + ' '; });
+  const area = 'M0 ' + H + ' L' + linea.slice(1) + 'L' + W + ' ' + H + ' Z';
+
+  const fin = s[s.length-1];
+  const cambio = ((fin.p - s[0].p) / s[0].p) * 100;
+  const sube = cambio >= 0;
+  const tinte = sube ? '#3ED598' : '#F26D5B';
+
+  box.innerHTML =
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<defs><linearGradient id="lav" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0%" stop-color="' + tinte + '" stop-opacity=".30"/>' +
+        '<stop offset="100%" stop-color="' + tinte + '" stop-opacity="0"/>' +
+      '</linearGradient></defs>' +
+      '<path d="' + area + '" fill="url(#lav)"/>' +
+      '<path d="' + linea.trim() + '" fill="none" stroke="' + tinte +
+        '" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' +
+      '<circle cx="' + x(fin).toFixed(1) + '" cy="' + y(fin).toFixed(1) + '" r="4" fill="' + tinte + '"/>' +
+    '</svg>';
+
+  const gv = $('gvar');
+  gv.className = 'gvar ' + (sube ? 'up' : 'dn');
+  gv.textContent = (sube ? '▲ ' : '▼ ') + Math.abs(cambio).toFixed(1) + '% en ' + rango;
+}
+
+$('rangos').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  rango = b.dataset.r;
+  [...$('rangos').children].forEach(x => x.classList.toggle('on', x === b));
+  dibujar();
+});
+
+if (window.ResizeObserver) new ResizeObserver(() => dibujar()).observe($('lienzo'));
+window.addEventListener('resize', dibujar);
+
+/* ───────── reloj ───────── */
 function tictac(){
   const h = new Date();
   $('reloj').textContent = h.toLocaleTimeString('es-MX',
@@ -320,10 +516,15 @@ function anclar(){
 $('portada').addEventListener('click', () => {
   $('portada').classList.add('ido');
   anclar();
+  dibujar();
 });
 
-tictac(); setInterval(tictac, 1000);
-actualizar(); setInterval(actualizar, CFG.refrescoMs);
+/* ───────── arranque ───────── */
+tictac();       setInterval(tictac, 1000);
+refrescarFx();  setInterval(refrescarFx, CFG.fxMs);
+cargarHistorico().then(refrescarOro);
+setInterval(cargarHistorico, CFG.histMs);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refrescarOro(); });
 </script>
 </body>
 </html>
