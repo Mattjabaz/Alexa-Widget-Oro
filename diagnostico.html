@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Diagnóstico · goldprice.dev</title>
+<style>
+body{background:#0A1A2F;color:#F4EFE6;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;
+  margin:0;padding:28px}
+h1{font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#81D8D0;margin:0 0 4px}
+p{color:#8AA4BC;margin:0 0 20px;font-size:13px}
+table{border-collapse:collapse;width:100%;max-width:900px}
+th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8AA4BC;
+  border-bottom:1px solid #1E3A56;padding:8px 10px}
+td{padding:8px 10px;border-bottom:1px solid #14263a;vertical-align:top}
+.ok{color:#3ED598;font-weight:700}
+.no{color:#F26D5B;font-weight:700}
+.det{color:#8AA4BC;font-size:12px;word-break:break-all}
+#veredicto{margin-top:24px;padding:14px 16px;border:1px solid #81D8D0;border-radius:4px;
+  max-width:900px;font-size:13px;line-height:1.6}
+</style>
+</head>
+<body>
+<h1>Diagnóstico goldprice.dev</h1>
+<p>Prueba cada forma de autenticar desde el navegador. Copia la tabla completa y pásamela.</p>
+<table>
+  <thead><tr><th style="width:150px">método</th><th style="width:110px">/v1/spot</th>
+  <th style="width:110px">/v1/bars</th><th>detalle</th></tr></thead>
+  <tbody id="filas"></tbody>
+</table>
+<div id="veredicto">Ejecutando…</div>
+
+<script>
+const CLAVE = 'ga_live_EmKrkD5osIhcnQxYir_o7ocAUYy0EmEXVqFUCdpb';
+const BASE  = 'https://api.goldprice.dev';
+
+const METODOS = [
+  ['api_key   (parámetro)', u=>{const x=new URL(u); x.searchParams.set('api_key',CLAVE); return [x,{}];}],
+  ['key       (parámetro)', u=>{const x=new URL(u); x.searchParams.set('key',CLAVE);     return [x,{}];}],
+  ['token     (parámetro)', u=>{const x=new URL(u); x.searchParams.set('token',CLAVE);   return [x,{}];}],
+  ['Bearer    (cabecera)',  u=>[new URL(u),{Authorization:'Bearer '+CLAVE}]],
+  ['X-API-Key (cabecera)',  u=>[new URL(u),{'X-API-Key':CLAVE}]],
+  ['sin llave (anónimo)',   u=>[new URL(u),{}]]
+];
+
+const hoy = new Date().toISOString().slice(0,10);
+const hace40 = new Date(Date.now()-40*86400000).toISOString().slice(0,10);
+const URL_SPOT = BASE + '/v1/spot/XAU-USD-SPOT?include=stats';
+const URL_BARS = BASE + '/v1/bars?symbol=XAU-USD-SPOT&interval=1d&from=' + hace40 + '&to=' + hoy + '&limit=100';
+
+async function probar(armar, url, clave){
+  try{
+    const [u,h] = armar(url);
+    const r = await fetch(u,{headers:h,cache:'no-store'});
+    if (!r.ok) return {ok:false, txt:'HTTP '+r.status, det:'HTTP '+r.status};
+    const j = await r.json();
+    if (clave === 'spot'){
+      const p = +j.price;
+      if (!Number.isFinite(p)) return {ok:false, txt:'sin precio', det:JSON.stringify(j).slice(0,120)};
+      const abre = +j.open_price;
+      return {ok:true, txt: Number.isFinite(abre) ? 'OK + stats' : 'OK sin stats',
+              det:'precio '+p+(Number.isFinite(abre)?' · apertura '+abre:' · SIN open_price')};
+    }
+    const n = (j.bars||[]).length;
+    return {ok:n>0, txt: n>0 ? 'OK '+n+' barras' : 'vacío',
+            det: n>0 ? 'primera '+j.bars[0].bar_start+' · tier '+(j.meta?.tier||'?') : JSON.stringify(j).slice(0,120)};
+  }catch(e){
+    return {ok:false, txt:'BLOQUEADO', det:'CORS / red — '+String(e.message||e)};
+  }
+}
+
+(async ()=>{
+  const cuerpo = document.getElementById('filas');
+  let ganadorSpot=null, ganadorBars=null, algo=false;
+
+  for (const [nombre, armar] of METODOS){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${nombre}</td><td>…</td><td>…</td><td class="det"></td>`;
+    cuerpo.appendChild(tr);
+
+    const a = await probar(armar, URL_SPOT, 'spot');
+    const b = await probar(armar, URL_BARS, 'bars');
+    tr.children[1].innerHTML = `<span class="${a.ok?'ok':'no'}">${a.txt}</span>`;
+    tr.children[2].innerHTML = `<span class="${b.ok?'ok':'no'}">${b.txt}</span>`;
+    tr.children[3].textContent = a.det + '  |  ' + b.det;
+
+    if (a.ok || b.ok) algo = true;
+    if (a.ok && a.txt.includes('stats') && !ganadorSpot) ganadorSpot = nombre;
+    if (b.ok && !ganadorBars) ganadorBars = nombre;
+  }
+
+  const v = document.getElementById('veredicto');
+  if (!algo){
+    v.innerHTML = '<b class="no">El navegador no alcanza api.goldprice.dev por ningún método.</b><br>' +
+      'El servidor no permite llamadas desde páginas web. La única salida es un proxy propio ' +
+      '(Cloudflare Workers) que haga las peticiones del lado del servidor.';
+  } else if (ganadorSpot && ganadorBars){
+    v.innerHTML = `<b class="ok">Funciona.</b><br>Spot con estadísticas: <b>${ganadorSpot}</b><br>Barras: <b>${ganadorBars}</b>`;
+  } else {
+    v.innerHTML = '<b class="no">Funciona a medias.</b><br>' +
+      'Spot con estadísticas: <b>' + (ganadorSpot||'ninguno') + '</b><br>' +
+      'Barras: <b>' + (ganadorBars||'ninguno') + '</b><br>' +
+      'Pásame la tabla completa para ajustar.';
+  }
+})();
+</script>
+</body>
+</html>
