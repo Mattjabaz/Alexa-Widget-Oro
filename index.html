@@ -331,6 +331,9 @@ const FUENTES_FX = [
 /* Cada rango pide su propio intervalo de barra.
    1D usa barras de 15 min: misma serie spot que el resto, no otra fuente. */
 const RANGOS = [
+  /* YTD: del 1 de enero a hoy. Los días se calculan solos, y el
+     espaciado del eje se adapta según cuánto lleve el año. */
+  { id:'YTD', anio:true, intervalo:'1d',  paso:{M:1},  fmt:'mes',    pro:true },
   { id:'1D', dias:1,    intervalo:'15m', paso:{h:3},  fmt:'hora' },
   { id:'1S', dias:7,    intervalo:'1h',  paso:{d:1},  fmt:'dia'  },
   { id:'1M', dias:30,   intervalo:'1d',  paso:{d:5},  fmt:'dia'  },
@@ -339,6 +342,20 @@ const RANGOS = [
   { id:'3A', dias:1095, intervalo:'1d',  paso:{M:6},  fmt:'mesaño', pro:true },
   { id:'5A', dias:1825, intervalo:'1d',  paso:{M:12}, fmt:'anio',   pro:true }
 ];
+
+/* Días que cubre un rango. YTD se mide desde el 1 de enero. */
+function diasDe(r){
+  if (!r.anio) return r.dias;
+  const h = new Date();
+  return Math.max(1, Math.ceil((h - new Date(h.getFullYear(), 0, 1)) / 86400000));
+}
+
+/* El eje X de YTD se aprieta o se afloja según el avance del año. */
+function pasoDe(r){
+  if (!r.anio) return r.paso;
+  const d = diasDe(r);
+  return d <= 21 ? {d:3} : d <= 70 ? {d:10} : {M:1};
+}
 
 const $ = id => document.getElementById(id);
 const mx = (n,d=2) => n.toLocaleString('es-MX',{minimumFractionDigits:d,maximumFractionDigits:d});
@@ -464,7 +481,8 @@ function pintar(id,txt){
 async function traerBarras(idRango){
   if (barras.has(idRango)) return barras.get(idRango);
   const r = RANGOS.find(x=>x.id===idRango);
-  const desde = new Date(Date.now() - r.dias*86400000);
+  const desde = r.anio ? new Date(new Date().getFullYear(), 0, 1)
+                       : new Date(Date.now() - r.dias*86400000);
   const iso = d => d.toISOString().slice(0,19)+'Z';
   let cursor, salida=[], paginas=0, fallo=null;
 
@@ -674,7 +692,7 @@ function dibujar(){
   }
   /* cuadrícula + eje X */
   let etiqX='';
-  for (const t of marcasX(t0,t1,cfgR.paso)){
+  for (const t of marcasX(t0,t1,pasoDe(cfgR))){
     const x = X(t).toFixed(1);
     rejilla += `<line x1="${x}" y1="${M.a}" x2="${x}" y2="${M.a+ih}" stroke="#81D8D0" stroke-opacity=".07" stroke-width="1"/>`;
     etiqX   += `<text x="${x}" y="${H-6}" text-anchor="middle"
